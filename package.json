@@ -1,0 +1,26 @@
+{
+  "name": "metalsmith-blog-boilerplate",
+  "version": "1.0.0",
+  "description": "A complete boilerplate for getting started with a static blog, using Metalsmith and friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fatman-/metalsmith-blog-boilerplate.git"
+  },
+  "keywords": [
+    "metalsmith",
+    "static-blog",
+    "bigman",
+    "fatman",
+    "boilerplate"
+  ],
+  "author": "Sai Kishore Komanduri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fatman-/metalsmith-blog-boilerplate/issues"
+  },
+  "homepage": "https://github.com/fatman-/metalsmith-blog-boilerplate#readme"
+}

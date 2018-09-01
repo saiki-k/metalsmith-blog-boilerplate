@@ -1,0 +1,272 @@
+/* Normalize CSS */
+html {
+	margin: 0;
+	padding: 0;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	font-size: 16px;
+	font-family: 'PT Sans', sans-serif;
+	line-height: 1.5;
+	margin: 0;
+	padding: 60px 16px 0;
+	color: #111;
+	background-color: #fff;
+	text-rendering: optimizeLegibility;
+	font-feature-settings: "liga" on;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-moz-font-feature-settings: "liga" on;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+svg {
+	max-height: 100%;
+}
+a {
+	color: #7B3F00;
+	text-decoration: none;
+	border-bottom: 1px solid #4F4D4B;
+}
+a:hover {
+	border-color: transparent;
+}
+h1, h2, h3,
+h4, h5, h6 {
+	font-weight: 600;
+	line-height: 1.25;
+	margin-top: 1.5em;
+	margin-bottom: .5em;
+}
+h1 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+}
+h2 { font-size: 1.5rem }
+h3 { font-size: 1.25rem }
+h4 { font-size: 1rem }
+h5 { font-size: .875rem }
+h6 { font-size: .75rem }
+p, dl, ol, ul, pre, blockquote {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+pre,
+code {
+	font-family: 'Fira Code', monospace;
+	background: #111;
+	color: #fff;
+	border-radius: 4px;
+}
+pre {
+	padding: 1rem 1.5rem;
+	overflow: scroll;
+}
+code {
+	font-size: 87.5%;
+	padding: 0 6px;
+	display: inline-block;
+}
+pre code {
+	font-size: 100%;
+	padding: 0;
+	background: transparent;
+	border-radius: 0;
+}
+blockquote {
+	font-size: 1.25rem;
+	font-style: italic;
+	margin: 2rem 0;
+	padding: 6px 0 6px 16px;
+	border-left: 1px solid #111;
+	border-radius: 0 4px 4px 0;
+	background: #f5f5f5;
+}
+hr {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	border: 0;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #111111;
+}
+/* Normalize CSS - End */
+
+/* Header */
+header {
+	max-width: 1000px;
+	margin: 0 auto 32px;
+}
+header .blog-title {
+	font-family: 'Arvo', Georgia, Times, serif;
+	font-weight: normal;
+	font-size: 5.125rem;
+	line-height: 3.5rem;
+	text-align: right;
+	border-bottom: 2px solid #111;
+	color: #111;
+	letter-spacing: -0.5rem;
+	text-shadow: 1px 1px 2px #808080;
+	position: relative;
+	margin: 0;
+}
+header .blog-title a {
+	border: none;
+	text-decoration: none;
+	color: currentColor;
+	display: inline-block;
+}
+header .blog-title a .tld {
+	display: inline-block;
+	vertical-align: baseline;
+	color: #888;
+}
+header .blog-title a .tld-dot {
+	margin: 0 8px;
+}
+header nav>ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 40px;
+	display: inline-flex;
+	position: relative;
+}
+header nav>ul:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 6px;
+	border-radius: 100%;
+	display: inline-block;
+	background: #111;
+	transform: translateY(calc(-50% - 1px));
+}
+header nav>ul li {
+	margin: 0 10px 0 0;
+}
+header nav>ul a {
+	margin: 0;
+	border: none;
+	font-weight: 500;
+	text-transform: lowercase;
+	color: #888;
+	padding: 4px 16px;
+	display: block;
+	border-radius: 0 0 3px 3px;
+}
+header nav>ul a:before {
+	content: '/';
+	margin: 0 3px 0 0;
+	color: #ffffff;
+}
+header nav>ul a:hover {
+	background: #f5f5f5;
+}
+header nav>ul a.active {
+	color: #fff;
+	background: #111;
+}
+header nav>ul a:hover:before,
+header nav>ul a.active:before {
+	color: #aaa;
+}
+/* Header - End */
+
+/* Main Content */
+main {
+	max-width: 764px;
+	margin: auto;
+	padding: 72px 32px;
+	min-height: calc(100vh - 274px);
+}
+.post-list h3 {
+	font-size: 2rem;
+	margin: 0 0 12px;
+}
+.post-list ul {
+	margin: 0 0 72px -16px;
+	padding: 0 0 0 16px;
+}
+.post-list a {
+	font-size: 1.1rem;
+}
+.post-list a:hover+.post-meta,
+.post-list .post-meta:hover {
+	visibility: visible;
+	opacity: 1;
+}
+.post-list li {
+	margin: 0 0 12px;
+	position: relative;
+}
+.post-list .post-meta {
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.15s ease-in-out, visibility 0.2s ease-in-out;
+	left: -1.1rem;
+	top: 50%;
+	transform: translateX(-100%) translateY(-50%);
+}
+article {
+	position: relative;
+}
+article .post-meta {
+	left: 0;
+	transform: translateX(calc(-100% - 1.5rem)) translateY(calc(-50% + 1rem));
+}
+article p {
+	font-size: 1.125rem;
+}
+.post-meta {
+	position: absolute;
+	padding: 12px 16px;
+	width: 220px;
+	word-wrap: break-word;
+	border-radius: 4px;
+    border: 1px solid #111;
+	border-right-width: 2px;
+	background: #fafafa;
+	z-index: 1;
+}
+.post-meta:before,
+.post-meta:after {
+	content: "";
+	position: absolute;
+	right: -12px;
+	top: 50%;
+	transform: translateY(-50%);
+	border: 10px solid #111;
+	border-right: none;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+}
+.post-meta:after {
+	border-left-color: #fafafa;
+    right: -9px;
+}
+.post-meta p {
+	margin: 0 0 6px 0;
+	font-size: 0.875rem;
+	font-family: Fira Code;
+}
+.post-meta p:last-child {
+	margin: 0;
+}
+.post-meta p a {
+	font-size: inherit;
+}
+footer {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 32px;
+	border-top: 4px solid #eee;
+	text-align: center;
+}
+footer p {
+	margin: 0;
+}

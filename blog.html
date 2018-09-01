@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	
+	<title>A little personal blog project</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.rawgit.com/tonsky/FiraCode/1.205/distr/fira_code.css">
+	
+	<link rel="stylesheet" href="styles/monokai.css">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+	<header>
+		<p class="blog-title">
+			<a href="#">metalsmith<span class="tld">
+				<span class="tld-dot">.</span>blog</span>
+			</a>
+		</p>
+		<nav>
+			<ul>
+				<li>
+					<a  href="#" class="active">about</a>
+				</li>
+				<li>
+					<a href="#">blog</a>
+				</li>
+				<li>
+					<a href="#">feed</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<article>
+			<div class="post-meta">
+				<p>posted: 12 jan 2016</p>
+				<p>updated: 16 jan 2016</p>
+				<p>tags: <a>css</a>, <a>html</a>, <a>js</a></p>
+			</div>
+			<h1>JavaScript Patterns — Wrangling arrays like a boss, with Array#reduce 👊</h1>
+			<blockquote>"If you don't know SVG you can't call yourself a web developer, Call yourself a web enthusiast".</blockquote>
+			<h2 id="what-">What? 🤔</h2>
+			<p>At Hashnode, whenever we push our code upstream, we invite the rest of us, for a review of the same. These code review sessions, are uber awesome; primarily because we all get a chance of learning something unique.</p>
+			<p>Whenever a reviewer comes across a part of the code that could be optimised / refactored / rewritten in a better way, he makes a note of it, and passes it along to everyone, for future reference.</p>
+			<p>This story is a result of one of the notes I made, and the thought of turning it into a full-blown story.</p>
+			<p>Hopefully towards the end of it, some of you’ll appreciate the elegance of <code>Array#reduce</code>, and how you could use it to write efficient code when working with arrays in JavaScript.</p>
+			<p>Let's get started! 🙌🏼</p>
+			<h2 id="the-basics-">The Basics 👩&zwj;🏫</h2>
+			<p>As a programmer, it is pretty common to come across scenarios where you have to work with arrays of data, and to transform the said data into a desired format.</p>
+			<p>JavaScript has a <code>reduce</code> function available on array objects, which aids us in doing exactly that — transform the array data into a desired format. <code>reduce</code> takes two arguments:</p>
+			<ul>
+				<li>a <code>reducer</code> function, which is applied against an <code>accumulator</code>, and each <code>item</code> in the array (from left to right), to reduce it into to a single value</li>
+				<li>an <code>initialValue</code> for the accumulator</li>
+			</ul>
+			<p>What a mouthful! Let’s look at some code.</p>
+			<p>The below example, summing an array of numbers, is a quintessential one, which is given whenever <code>Array#reduce</code> is introduced.</p>
+			<pre><code><span class="hljs-keyword">const</span> numbers === [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>];
+				<span class="hljs-keyword">const</span> reducer !== (accumulator, item) =&gt; {
+					<span class="hljs-keyword">return</span> accumulator + item;
+				};
+				
+				<span class="hljs-keyword">const</span> initialValue = <span class="hljs-number">0</span>;
+				<span class="hljs-keyword">const</span> total = numbers.reduce(reducer, initialValue);
+				
+				<span class="hljs-comment">// The following outputs: "The sum is: 60"</span>
+				console.<span class="hljs-built_in">log</span>(<span class="hljs-string">"The sum is: "</span>, total);
+			</code></pre>
+			<h3 id="-important-pitfall-note-"><strong>Important "Pitfall" Note 👇</strong></h3>
+			<blockquote>
+				<p><strong>Always remember to </strong><code>return</code> <strong>in a </strong><code>reducer</code> <strong>function.</strong> Whatever you return becomes the <code>accumulator</code> value, for the next <code>item</code> in the array.</p>
+			</blockquote>
+			<p>It might seem trivial in a simple reducer function like above, but more often than not, in complex reducer functions, forgetting to <code>return</code> is one of the main causes of <code>Array#reduce</code> "bugs".</p>
+			<hr>
+			<p>Before we discuss on how <em><strong>we</strong></em> made use of <code>Array#reduce</code> to rewrite a tiny part of our codebase; let me run you through a couple of pointers, that I've found to be not-so-intuitive for those who are unacquainted with them.</p>
+			<h3 id="-1-reduce-operation-can-be-used-on-an-array-to-reduce-it-not-necessarily-to-a-primitive-value-but-also-to-an-object-including-an-array-">#1: <code>reduce</code> operation can be used on an array to reduce it, not necessarily to a primitive value, but also to an object (including an array)</h3>
+			<p>Let's write a program to find out the total number of multiples of 6 in an array, and output an object — like this: <code>{ totalMultiplesOfSix: 1, totalNonMultiplesOfSix: 1 }</code>, say for an input of: <code>[6, 7]</code>.</p>
+			<pre><code>===</code></pre>
+			<pre><code>!==</code></pre>
+			<pre><code><span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>, <span class="hljs-number">60</span>, <span class="hljs-number">70</span>, <span class="hljs-number">80</span>, <span class="hljs-number">90</span>, <span class="hljs-number">100</span>];
+				<span class="hljs-keyword">const</span> multiplesOfSixInfo = numArray =&gt; numArray.reduce(
+				(acc, item) =&gt; {
+					(item % <span class="hljs-number">6</span> === <span class="hljs-number">0</span>)
+					? acc.totalMultiplesOfSix += <span class="hljs-number">1</span>
+					: acc.totalNonMultiplesOfSix += <span class="hljs-number">1</span>;
+					
+					<span class="hljs-comment">// Don't forget to return the accumulator, and make it available ...</span>
+					<span class="hljs-comment">// ...to the next item in numArray</span>
+					<span class="hljs-keyword">return</span> acc;
+				},
+				{ totalMultiplesOfSix: <span class="hljs-number">0</span>, totalNonMultiplesOfSix: <span class="hljs-number">0</span> }
+				);
+				
+				<span class="hljs-comment">// The following outputs "{totalMultiplesOfSix: 3, totalNonMultiplesOfSix: 7}"</span>
+				console.log(multiplesOfSixInfo(numbers));
+			</code></pre>
+			<p>Notice that the initial value passed in <code>numArray#reduce</code> is the object <code>{ totalMultiplesOfSix: 0, totalNonMultiplesOfSix: 0 }</code>.</p>
+			<h3 id="-2-map-and-filter-operations-can-be-thought-of-as-reduce-operations">#2: <code>map</code> and <code>filter</code> operations, can be thought of as <code>reduce</code> operations</h3>
+			<p>Let's get straight down to some code to understand what the above pointer means. Here's some code with a <code>map</code> operation:</p>
+			<pre><code><span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>];
+				<span class="hljs-keyword">const</span> squaresOfNumbers = numArray =&gt; numbers.<span class="hljs-built_in">map</span>(item =&gt; item * item;);
+				
+				<span class="hljs-comment">// The following outputs: "[100, 400, 900]"</span>
+				console.<span class="hljs-built_in">log</span>(squaresOfNumbers(numbers));
+			</code></pre>
+			<p>The above code can be re-written using <code>Array#reduce</code> as:</p>
+			<pre><code>const numbers = [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>];
+				const squaresOfNumbers = numArray =&gt; numbers.reduce(
+				<span class="hljs-function"><span class="hljs-params">(acc, item)</span> =&gt;</span> {
+					acc.push(item * item);
+					<span class="hljs-keyword">return</span> acc;
+				},
+				[]
+				);
+				
+				<span class="hljs-regexp">//</span> The following outputs: <span class="hljs-string">"[100, 400, 900]"</span>
+				<span class="hljs-built_in">console</span>.log(squaresOfNumbers(numbers));
+			</code></pre>
+			<p>Let's look at a <code>filter</code> operation, now:</p>
+			<pre><code><span class="hljs-keyword">const</span> numbers = [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>];
+				<span class="hljs-keyword">const</span> multiplesOfSix = numArray =&gt; numArray.filter(item =&gt; item % <span class="hljs-number">6</span> === <span class="hljs-number">0</span>);
+				
+				<span class="hljs-comment">// The following outputs: "[30]"</span>
+				console.log(multiplesOfSix(numbers));
+			</code></pre>
+			<p>The above code can be re-written using <code>Array#reduce</code> as:</p>
+			<pre><code>const numbers = [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>];
+				const multiplesOfSix = numArray =&gt; numArray.reduce(
+				<span class="hljs-function"><span class="hljs-params">(acc, item)</span> =&gt;</span> {
+					<span class="hljs-keyword">if</span> (item % <span class="hljs-number">6</span> === <span class="hljs-number">0</span>) acc.push(item);
+					<span class="hljs-keyword">return</span> acc;
+				},
+				[]
+				);
+				
+				<span class="hljs-regexp">//</span> The following outputs: <span class="hljs-string">"[30]"</span>
+				<span class="hljs-built_in">console</span>.log(multiplesOfSix(numbers));
+			</code></pre>
+			<p>Now that we have discussed #2 — understanding which, is a pre-cursor to understanding the next point — let's jump to #3.</p>
+			<h3 id="-3-you-can-use-reduce-to-rewrite-multiple-operations-on-an-array-into-a-single-op-">#3: you can use <code>reduce</code> to rewrite multiple operations on an array into a single op.</h3>
+			<p>After a first glance at code under #2, you might have thought the code with <code>map</code> and <code>filter</code> is much more concise, and readable, than its counterpart <code>reduce</code> code; and you are right in thinking so.</p>
+			<p>But when you have an array with a lot of values, doing multiple operations on it — for instance, a <code>map</code>, followed by a <code>map</code>, followed by a <code>filter</code> — can get <strong>resource intensive</strong>.</p>
+			<p>It is at places like the above, where a single <code>reduce</code> operation, is a far more <strong>beneficial pattern</strong>, instead of multiple operations on the array; even when the latter leads to concise code.</p>
+			<h2 id="one-reduce-to-rule-them-all-">One <code>reduce</code> to rule them all ✨</h2>
+			<p><strong>a.k.a. #3 — you can use </strong><code>reduce</code> <strong>to rewrite multiple operations on an array into a single op.; a beneficial pattern, especially when dealing with large arrays</strong></p>
+			<p>Let's look at some code, to know more about this pattern; and what exactly the words, '<strong>beneficial pattern</strong>', and '<strong>resource intensive</strong>' entail here.</p>
+			<p>The problem <em><strong>we</strong></em> had at hand, was to get an array of (unique) emails, of all followers, for a given set of nodes. So for an example, dummy <code>nodes</code> dataset like the following:</p>
+			<pre><code><span class="hljs-keyword">var</span> nodes = [
+				{ 
+					name: <span class="hljs-string">'java'</span>,
+					followers: [
+					{ name: <span class="hljs-string">'ABC'</span>, email: <span class="hljs-string">'abc@abc.com'</span> },
+					{ name: <span class="hljs-string">'IJK'</span>, email: <span class="hljs-string">'ijk@ijk.com'</span> },
+					{ name: <span class="hljs-string">'LMN'</span>, email: <span class="hljs-string">'lmn@lmn.com'</span> }
+					]
+				},
+				{ 
+					name: <span class="hljs-string">'javascript'</span>,
+					followers: [
+					{ name: <span class="hljs-string">'ABC'</span>, email: <span class="hljs-string">'abc@abc.com'</span> },
+					{ name: <span class="hljs-string">'IJK'</span>, email: <span class="hljs-string">'ijk@ijk.com'</span> },
+					{ name: <span class="hljs-string">'XYZ'</span>, email: <span class="hljs-string">'xyz@xyz.com'</span> }
+					]
+				},
+				{ 
+					name: <span class="hljs-string">'programming'</span>,
+					followers: [
+					{ name: <span class="hljs-string">'XYZ'</span>, email: <span class="hljs-string">'abc@abc.com'</span> },
+					{ name: <span class="hljs-string">'IJK'</span>, email: <span class="hljs-string">'ijk@ijk.com'</span> },
+					{ name: <span class="hljs-string">'PQR'</span> }
+					]
+				}
+				]
+			</code></pre>
+			<p>...the output of the function <code>getSetOfFollowerEmails(nodes)</code> is expected to be:</p>
+			<pre><code>[
+				'abc@abc.com',
+				'ijk@ijk.com',
+				'lmn@lmn.com',
+				'xyz@xyz.com'
+				]
+			</code></pre>
+			<h3 id="old-code-">Old code 👵</h3>
+			<p>This was the code which I came across in my review. The following code is so concise, that even my grand-mom would get it after a single go! :D</p>
+			<pre><code>import _ from <span class="hljs-string">'lodash'</span>;
+				
+				<span class="hljs-keyword">const</span> getSetOfFollowerEmails = (nodes) =&gt; {    
+					let followers = _.flatten(nodes.map(node =&gt; node.followers));
+					followers = followers.filter(follower =&gt; follower.email ? <span class="hljs-keyword">true</span> : <span class="hljs-keyword">false</span>);
+					followers = _.uniqBy(followers, <span class="hljs-string">'email'</span>);
+					
+					<span class="hljs-keyword">const</span> followerEmails = followers.map(follower =&gt; follower.email);
+					<span class="hljs-keyword">return</span> followerEmails;
+				}
+			</code></pre>
+			<h3 id="improved-code-">Improved code 👩</h3>
+			<p>But ... we changed its implementation. While the following code isn't as concise, or as readable, as the above code; it has its + points. Read the code, and we'll see why!</p>
+			<pre><code><span class="hljs-keyword">const</span> getSetOfFollowerEmails = (nodes) =&gt; {
+				<span class="hljs-keyword">return</span> _.uniq(nodes.reduce(
+				(followerEmails, node) =&gt; {
+					node.followers.<span class="hljs-keyword">forEach</span>(
+					follower =&gt; {
+						<span class="hljs-keyword">if</span> (follower.email) {
+							followerEmails.push(follower.email);
+						}
+					}
+					);
+					
+					<span class="hljs-comment">// Don't forget to return the accumulator;</span>
+					<span class="hljs-keyword">return</span> followerEmails;
+				},
+				<span class="hljs-comment">// Initial accumulator here, is an empty array</span>
+				[]
+				));
+			}
+			</code></pre>
+			<p><strong>Update:</strong> <a target="_blank" rel="noopener noreferrer" href="https://hashnode.com/@rjstires" title="Robert Stires's Profile - Hashnode">Robert Stires</a> optimised the above piece of code, even more by replacing the <code>forEach</code>				operation, with a <code>reduce</code> operation. Take a look, <a target="_blank" rel="noopener noreferrer" href="https://jsperf.com/multi-reducer-comparison">here</a>. Nicely done, Robert! 👏</p>
+			<h3 id="rationale-">Rationale 🤓</h3>
+			<p>The most obvious observation would be — as the number of <code>followers</code> grow, so does the inefficiency of the old code 👵, because, if you obverse, we're iterating through the <code>followers</code> array multiple times; but where as in the improved code, we're only doing it twice.</p>
+			<p>But let's verify the above observation with numbers. Let's create a dummy, large <code>nodes</code> dataset and let's use both of the implementations, on <code>nodes</code>, to find out which one's better.</p>
+			<p>The requisite code for doing so, can be framed as follows:</p>
+			<pre><code><span class="hljs-keyword">const</span> getEmailsUsingSingleReduceOp = (nodes) =&gt; { ...
+				<span class="hljs-keyword">const</span> getEmailsUsingMultipleArrayOps = (nodes) =&gt; { ...
+					
+					<span class="hljs-keyword">const</span> nodes = [];
+					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">50</span>; i++) {
+						<span class="hljs-keyword">const</span> followers = [];
+						<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">5000</span>; j++) {
+							followers.push({ name: <span class="hljs-string">`ABC<span class="hljs-subst">${i}</span><span class="hljs-subst">${j}</span>`</span>, email: <span class="hljs-string">`abc<span class="hljs-subst">${i}</span><span class="hljs-subst">${j}</span>@abc.com`</span> });
+						}
+						nodes.push({
+							name: <span class="hljs-string">`node<span class="hljs-subst">${i}</span>`</span>,
+							followers: followers
+						});
+					}
+					
+					<span class="hljs-built_in">console</span>.time(<span class="hljs-string">'Multiple Array Ops.'</span>);
+					getEmailsUsingMultipleArrayOps(nodes);
+					<span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">'Multiple Array Ops.'</span>);
+					
+					<span class="hljs-built_in">console</span>.time(<span class="hljs-string">'Single Reduce Op.'</span>);
+					getEmailsUsingSingleReduceOp(nodes);
+					<span class="hljs-built_in">console</span>.timeEnd(<span class="hljs-string">'Single Reduce Op.'</span>);
+			</code></pre>
+			<p>The above code outputs (approx. values):</p>
+			<pre><code><span class="hljs-selector-tag">Multiple</span> <span class="hljs-selector-tag">Array</span> <span class="hljs-selector-tag">Ops</span>.: 535<span class="hljs-selector-class">.941ms</span>
+				<span class="hljs-selector-tag">Single</span> <span class="hljs-selector-tag">Reduce</span> <span class="hljs-selector-tag">Op</span>.: 149<span class="hljs-selector-class">.408ms</span>
+			</code></pre>
+			<p>As you can see, <code>getEmailsUsingSingleReduceOp</code> outperforms <code>getEmailsUsingMultipleArrayOps</code> by ~3.6 times.</p>
+			<h2 id="conclusion-">Conclusion 👋</h2>
+			<p>We've seen the basics of <code>Array#reduce</code> and how to make use of it to improve code with multiple operations on an array; resulting in better performant code.</p>
+			<p>There are other cool patterns that you can achieve by using <code>Array#reduce</code>. For instance, you can create function pipelines (you can also create function pipelines that you can break out of, mid-way, using <code>Array#some</code>). I look forward to covering these in a different story.</p>
+			<p>Until then, 🙂👋!</p>
+		</article>
+	</main>
+	<footer>
+		<p>© Sai Kishore Komanduri, 2018. To contact, <a href="#">email me</a>.</p>
+	</footer>
+</body>
+</html>
