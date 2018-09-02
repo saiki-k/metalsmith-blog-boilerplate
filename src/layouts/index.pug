@@ -1,0 +1,88 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title A little personal blog project
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(href='https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet')
+  link(rel='stylesheet' href='https://cdn.rawgit.com/tonsky/FiraCode/1.205/distr/fira_code.css')
+  link(rel='stylesheet' href='../assets/css/style.css')
+header
+  p.blog-title
+    a(href='#')
+      | metalsmith
+      span.tld
+        span.tld-dot .
+        | blog
+  nav
+    ul
+      li
+        a(href='#') about
+      li
+        a.active(href='#') blog
+      li
+        a(href='#') feed
+main
+  section.post-list
+    h3 2018
+    ul
+      li
+        a(href='#') JavaScript Patterns &mdash; Wrangling arrays like a boss, with Array#reduce &#x1F44A;
+        .post-meta
+          p posted: 12 jan 2016
+          p updated: 16 jan 2016
+          p
+            | tags: 
+            a css
+            | , 
+            a html
+            | , 
+            a js
+      li
+        a(href='#')
+          | FeathersJS Tip &mdash; On feathers transpilation, when using babel-register at server-side
+        .post-meta
+          p posted: 12 jan 2016
+          p updated: 16 jan 2016
+          p
+            | tags: 
+            a css
+            | , 
+            a html
+            | , 
+            a js
+      li
+        a(href='#') Tightly Controlled Textareas &mdash; Building solid plain text editors in React
+        .post-meta
+          p posted: 12 jan 2016
+          p updated: 16 jan 2016
+          p
+            | tags: 
+            a css
+            | , 
+            a html
+            | , 
+            a js
+    h3 2017
+    ul
+      li
+        a(href='#') JavaScript Patterns &mdash; Wrangling arrays like a boss, with Array#reduce &#x1F44A;
+      li
+        a(href='#')
+          | FeathersJS Tip &mdash; On feathers transpilation, when using babel-register at server-side
+      li
+        a(href='#') Tightly Controlled Textareas &mdash; Building solid plain text editors in React
+    h3 2016
+    ul
+      li
+        a(href='#') JavaScript Patterns &mdash; Wrangling arrays like a boss, with Array#reduce &#x1F44A;
+      li
+        a(href='#')
+          | FeathersJS Tip &mdash; On feathers transpilation, when using babel-register at server-side
+      li
+        a(href='#') Tightly Controlled Textareas &mdash; Building solid plain text editors in React
+footer
+  p
+    | &copy; Sai Kishore Komanduri, 2018. To contact, 
+    a(href='#') email me
+    | .

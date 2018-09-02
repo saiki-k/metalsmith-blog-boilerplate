@@ -11,10 +11,10 @@ import tags from 'metalsmith-tags';
 const build = () => {
     const options = {
         collections: {
-            writings: {
-                pattern: 'writings/**/*.md',
+            blog: {
+                pattern: 'posts/**/*.md',
                 sortBy: 'date',
-                reverse: true, 
+                reverse: true,
             },
             pages: {
                 pattern: 'pages/**/*.md',
