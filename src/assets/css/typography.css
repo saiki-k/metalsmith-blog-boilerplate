@@ -1,0 +1,52 @@
+h1, h2, h3,
+h4, h5, h6 {
+	font-weight: 600;
+	line-height: 1.25;
+	margin-top: 1.5em;
+	margin-bottom: .5em;
+}
+h1 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+}
+h2 { font-size: 1.5rem }
+h3 { font-size: 1.25rem }
+h4 { font-size: 1rem }
+h5 { font-size: .875rem }
+h6 { font-size: .75rem }
+
+p, dl, ol, ul, pre, blockquote {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+pre,
+code {
+	font-family: 'Fira Code', monospace;
+	background: #111;
+	color: #fff;
+	border-radius: 4px;
+}
+pre {
+	padding: 1rem 1.5rem;
+	overflow: scroll;
+}
+code {
+	font-size: 87.5%;
+	padding: 0 6px;
+	display: inline-block;
+}
+pre code {
+	font-size: 100%;
+	padding: 0;
+	background: transparent;
+	border-radius: 0;
+}
+blockquote {
+	font-size: 1.25rem;
+	font-style: italic;
+	margin: 2rem 0;
+	padding: 6px 0 6px 16px;
+	border-left: 1px solid #111;
+	border-radius: 0 4px 4px 0;
+	background: #f5f5f5;
+}

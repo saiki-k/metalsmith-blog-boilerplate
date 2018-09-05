@@ -1,7 +1,7 @@
 {
   "name": "metalsmith-blog-boilerplate",
   "version": "1.0.0",
-  "description": "A complete boilerplate for getting started with a static blog, using Metalsmith and friends",
+  "description": "A complete boilerplate for getting started with a static blog, using metalsmith and friends",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
