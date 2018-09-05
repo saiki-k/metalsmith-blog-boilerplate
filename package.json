@@ -1,17 +1,17 @@
 {
-  "name": "metalsmith-blog-boilerplate",
+  "name": "gatsby-blog-boilerplate",
   "version": "1.0.0",
-  "description": "A complete boilerplate for getting started with a static blog, using Metalsmith and friends",
+  "description": "A complete boilerplate for getting started with a static blog, using gatsby and friends",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fatman-/metalsmith-blog-boilerplate.git"
+    "url": "git+https://github.com/fatman-/gatsby-blog-boilerplate.git"
   },
   "keywords": [
-    "metalsmith",
+    "gatsby",
     "static-blog",
     "bigman",
     "fatman",
@@ -20,21 +20,21 @@
   "author": "Sai Kishore Komanduri",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fatman-/metalsmith-blog-boilerplate/issues"
+    "url": "https://github.com/fatman-/gatsby-blog-boilerplate/issues"
   },
-  "homepage": "https://github.com/fatman-/metalsmith-blog-boilerplate#readme",
+  "homepage": "https://github.com/fatman-/gatsby-blog-boilerplate#readme",
   "dependencies": {
     "jstransformer-consolidate": "^0.4.0",
     "jstransformer-pug": "^0.3.0",
-    "metalsmith": "^2.3.0",
-    "metalsmith-assets-improved": "^1.0.0",
-    "metalsmith-collections": "^0.9.0",
-    "metalsmith-drafts": "0.0.1",
-    "metalsmith-layouts": "^2.1.0",
-    "metalsmith-markdown": "^0.2.2",
-    "metalsmith-permalinks": "^0.5.0",
-    "metalsmith-tags": "^2.0.0",
-    "metalsmith-updated": "^0.1.6"
+    "gatsby": "^2.3.0",
+    "gatsby-assets-improved": "^1.0.0",
+    "gatsby-collections": "^0.9.0",
+    "gatsby-drafts": "0.0.1",
+    "gatsby-layouts": "^2.1.0",
+    "gatsby-markdown": "^0.2.2",
+    "gatsby-permalinks": "^0.5.0",
+    "gatsby-tags": "^2.0.0",
+    "gatsby-updated": "^0.1.6"
   },
   "devDependencies": {
     "serve": "^10.0.0"
