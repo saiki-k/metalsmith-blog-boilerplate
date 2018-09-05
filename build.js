@@ -1,12 +1,12 @@
-import gatsby from 'gatsby';
-import collections from 'gatsby-collections';
-import markdown from 'gatsby-markdown';
-import permalinks from 'gatsby-permalinks';
-import layouts from 'gatsby-layouts';
-import assets from 'gatsby-assets-improved';
-import drafts from 'gatsby-drafts';
-import updated from 'gatsby-updated';
-import tags from 'gatsby-tags';
+import metalsmith from 'metalsmith';
+import collections from 'metalsmith-collections';
+import markdown from 'metalsmith-markdown';
+import permalinks from 'metalsmith-permalinks';
+import layouts from 'metalsmith-layouts';
+import assets from 'metalsmith-assets-improved';
+import drafts from 'metalsmith-drafts';
+import updated from 'metalsmith-updated';
+import tags from 'metalsmith-tags';
 
 const build = () => {
     const options = {
@@ -34,7 +34,7 @@ const build = () => {
         permalinks: {},
     };
     
-    gatsby(__dirname)
+    metalsmith(__dirname)
         .source('src')
         .use(drafts())
         .use(collections(options.collections))
