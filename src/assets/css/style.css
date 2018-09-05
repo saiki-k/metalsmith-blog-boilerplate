@@ -94,6 +94,34 @@ hr {
 	border-bottom-style: solid;
 	border-bottom-color: #111111;
 }
+table {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+}
+table th {
+	padding: 8px 16px;
+	background: #111;
+	border: 1px solid #111;
+	color: #fff;
+}
+table thead th:first-child {
+	border-radius: 4px 0 0 0;
+}
+table thead th:last-child {
+	border-radius: 4px 0 0 0;
+}
+table tbody tr:last-child td:first-child {
+	border-radius: 0 0 0 4px;
+}
+table tbody tr:last-child td:last-child {
+	border-radius: 0 0 4px 0;
+}
+table td {
+	padding: 8px 16px;
+	border: 1px solid #e0e0e0;
+}
+
 /* Normalize CSS - End */
 
 /* Header */
@@ -105,20 +133,23 @@ header .blog-title {
 	font-family: 'Arvo', Georgia, Times, serif;
 	font-weight: normal;
 	font-size: 5.125rem;
-	line-height: 3.5rem;
+	line-height: 3.7rem;
 	text-align: right;
-	border-bottom: 2px solid #111;
 	color: #111;
 	letter-spacing: -0.5rem;
-	text-shadow: 1px 1px 2px #808080;
 	position: relative;
 	margin: 0;
+	z-index: 1;
 }
 header .blog-title a {
 	border: none;
+	text-shadow: 1px 1px 2px #808080;
 	text-decoration: none;
 	color: currentColor;
 	display: inline-block;
+}
+header .blog-title a:hover {
+	text-shadow: none;
 }
 header .blog-title a .tld {
 	display: inline-block;
@@ -128,14 +159,11 @@ header .blog-title a .tld {
 header .blog-title a .tld-dot {
 	margin: 0 8px;
 }
-header nav>ul {
-	list-style: none;
-	margin: 0;
-	padding: 0 0 0 40px;
-	display: inline-flex;
+header nav {
+	border-top: 2px solid #111;
 	position: relative;
 }
-header nav>ul:before {
+header nav:before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -145,6 +173,12 @@ header nav>ul:before {
 	display: inline-block;
 	background: #111;
 	transform: translateY(calc(-50% - 1px));
+}
+header nav>ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 40px;
+	display: inline-flex;
 }
 header nav>ul li {
 	margin: 0 10px 0 0;
@@ -184,9 +218,60 @@ main {
 	padding: 72px 32px;
 	min-height: calc(100vh - 274px);
 }
+
+.tag-title {
+	border: 2px solid #111;
+	border-radius: 8px;
+	font-size: 1.8rem;
+	font-weight: normal;
+	font-family: "Fira Code";
+	position: relative;
+	display: inline-block;
+	height: 56px;
+	background: #f5f5f5;
+	margin: 0 0 0 -22px;
+}
+.tag-title .text {
+	height: 52px;
+	line-height: 52px;
+	border-radius: 7px;
+	padding: 0 20px;
+	display: inline-block;
+	z-index: 3;
+	position: relative;
+	background: #f5f5f5;
+}
+.tag-title:before,
+.tag-title:after {
+	content: "";
+    display: block;
+	position: absolute;
+	border: 2px solid #111;
+}
+.tag-title:before {
+    right: -17px;
+    top: 4px;
+    width: calc(56px / 1.4);
+    height: calc(56px / 1.4);
+    border-radius: 8px;
+    transform: rotate(45deg);
+    z-index: 0;
+    background: inherit;
+}
+.tag-title:after {
+	width: 8px;
+    height: 8px;
+    right: -10px;
+    top: calc(50% - 6px);
+    z-index: 3;
+    background: #fff;
+    border-radius: 100%;
+}
+
+section > h1,
 .post-list h3 {
 	font-size: 2rem;
-	margin: 0 0 12px;
+	margin: 0 0 32px;
 }
 .post-list ul {
 	margin: 0 0 72px -16px;
@@ -209,7 +294,8 @@ main {
 	opacity: 0;
 	transition: opacity 0.15s ease-in-out, visibility 0.2s ease-in-out;
 	left: -32px;
-	top: 50%;
+	/* top: 50%; */
+	top: 0.825rem;
 	transform: translateX(-100%) translateY(-50%);
 }
 article {
@@ -253,12 +339,114 @@ article p {
 	margin: 0 0 6px 0;
 	font-size: 0.875rem;
 	font-family: Fira Code;
+	font-weight: 600;
+}
+.post-meta p .meta-title {
+	font-weight: 400;
 }
 .post-meta p:last-child {
 	margin: 0;
 }
 .post-meta p a {
 	font-size: inherit;
+}
+.tags-wrap {
+	margin: 0;
+	padding: 0;
+	font-size: 1.1rem;
+}
+.tags-wrap li {
+	margin: 0 0 12px;
+}
+.description-list {
+	margin: 0;
+	padding: 0;
+}
+.description-list li {
+	margin: 0 0 36px;
+}
+.description-list a {
+	font-size: 1.1rem;
+}
+.description-list .desc {
+	margin: 12px 0 0;
+    padding: 12px 16px;
+    width: 100%;
+    word-wrap: break-word;
+    border-radius: 4px;
+    border: 1px solid #111;
+    border-top-width: 2px;
+	background: #fafafa;
+	position: relative;
+	font-family: "Fira Code";
+}
+.description-list .desc:before,
+.description-list .desc:after {
+    content: "";
+    position: absolute;
+	left: 16px;
+	top: -11px;
+    border: 10px solid #111;
+    border-top: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+.description-list .desc:after {
+    border-bottom-color: #fafafa;
+    top: -9px;
+}
+.badges-list {
+	margin: 0 0 16px;
+}
+.social-badge,
+.social-badge:hover {
+	display: inline-flex;
+	align-items: center;
+	border: 2px solid #111;
+	border-radius: 4px;
+	margin: 8px 16px 8px 0;
+	color: #111;
+}
+.social-badge:hover svg {
+	background: transparent;
+	fill: #111;
+	transition: background-color 0.1s ease-in-out, fill 0.2s ease-in-out;
+}
+.social-badge:hover span:before {
+	opacity: 1;
+}
+.social-badge.facebook:hover svg {
+	fill: #3b5998;
+}
+.social-badge.twitter:hover svg {
+	fill: #1da1f2;
+}
+.social-badge.linkedin:hover svg {
+	fill: #007bb5;
+}
+.social-badge.medium:hover svg {
+	fill: #02b875;
+}
+.social-badge.github:hover svg {
+	fill: #111;
+}
+
+.social-badge svg {
+	height: 30px;
+    width: 40px;
+    padding: 6px;
+    background-color: #111;
+    fill: #fff;
+}
+.social-badge span {
+	padding: 0 12px 0 0;
+}
+.social-badge span:before {
+	content: "/";
+	margin: 0 7px 0 0;
+	color: #666;
+	opacity: 0;
+	transition: opacity 0.1s ease-in-out;
 }
 footer {
 	max-width: 1000px;
@@ -269,4 +457,70 @@ footer {
 }
 footer p {
 	margin: 0;
+}
+
+@media (max-width: 1200px) {
+	.post-meta {
+		border-right-width: 1px;
+	}
+	.post-meta:before,
+	.post-meta:after {
+		transform: rotate(90deg);
+		right: auto;
+		left: 24px;
+		top: calc(100% - 5px)
+	}
+	.post-meta:after {
+		margin: -2px 0 0;
+	}
+	.post-list .post-meta {
+		transform: none;
+		left: 0;
+		top: auto;
+		bottom: calc(100% + 8px);
+	}
+	article .post-meta {
+		transform: none;
+		position: relative;
+		width: 100%;
+		margin-bottom: -20px;
+	}
+	article .post-meta p {
+		display: inline-block;
+		margin: 3px 16px 3px 0;
+	}
+}
+@media (max-width: 900px) {
+	header .blog-title {
+		font-size: 4rem;
+		line-height: 2.8rem;
+	}
+}
+@media (max-width: 768px) {
+	header nav>ul {
+		display: block;
+		padding: 0;
+		margin: 0 32px;
+		border: 2px solid #111;
+		border-radius: 0 0 4px 4px;
+		border-top: none;
+		/* display: none; */
+	}
+	header nav>ul li {
+		margin: 0;
+		border-bottom: 1px solid rgba(17, 17, 17, 0.06);
+	}
+	header nav>ul a {
+		padding: 7px 16px;
+	}
+}
+@media (max-width: 480px) {
+	header .blog-title {
+		font-size: 3rem;
+		line-height: 2.1rem;
+		letter-spacing: -0.3rem;
+	}
+	header .blog-title a .tld-dot {
+		margin: 0 4px;
+	}
 }
