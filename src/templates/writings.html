@@ -25,13 +25,22 @@
 		<nav>
 			<ul>
 				<li>
-					<a  href="#">about</a>
+					<a href="./about">about</a>
 				</li>
 				<li>
-					<a href="#" class="active">blog</a>
+					<a href="./writings" class="active">writings</a>
 				</li>
 				<li>
-					<a href="#">feed</a>
+					<a href="./projects">projects</a>
+				</li>
+				<li>
+					<a href="./talks">talks</a>
+				</li>
+				<li>
+					<a href="./feeds">feeds</a>
+				</li>
+				<li>
+					<a href="./courses">courses</a>
 				</li>
 			</ul>
 		</nav>
@@ -39,9 +48,9 @@
 	<main>
 		<article>
 			<div class="post-meta">
-				<p>posted: 12 jan 2016</p>
-				<p>updated: 16 jan 2016</p>
-				<p>tags: <a>css</a>, <a>html</a>, <a>js</a></p>
+				<p><span class="meta-title">posted:</span> 12 jan 2016</p>
+				<p><span class="meta-title">updated:</span> 16 jan 2016</p>
+				<p><span class="meta-title">tags:</span> <a>css</a>, <a>html</a>, <a>js</a></p>
 			</div>
 			<h1>JavaScript Patterns — Wrangling arrays like a boss, with Array#reduce 👊</h1>
 			<blockquote>"If you don't know SVG you can't call yourself a web developer, Call yourself a web enthusiast".</blockquote>
@@ -50,6 +59,40 @@
 			<p>Whenever a reviewer comes across a part of the code that could be optimised / refactored / rewritten in a better way, he makes a note of it, and passes it along to everyone, for future reference.</p>
 			<p>This story is a result of one of the notes I made, and the thought of turning it into a full-blown story.</p>
 			<p>Hopefully towards the end of it, some of you’ll appreciate the elegance of <code>Array#reduce</code>, and how you could use it to write efficient code when working with arrays in JavaScript.</p>
+			<table>
+				<thead>
+				<tr>
+				<th>Tables</th>
+				<th align="center">Are</th>
+				<th align="right">Cool</th>
+				<th align="right">Something</th>
+				<th align="right">Nice</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				<td>col 1 is</td>
+				<td align="center">left-aligned</td>
+				<td align="right">$1600</td>
+				<td align="right">$1600</td>
+				<td align="right">$1600</td>
+				</tr>
+				<tr>
+				<td>col 2 is</td>
+				<td align="center">centered</td>
+				<td align="right">$12</td>
+				<td align="right">$12</td>
+				<td align="right">$12</td>
+				</tr>
+				<tr>
+				<td>col 3 is</td>
+				<td align="center">right-aligned</td>
+				<td align="right">$1</td>
+				<td align="right">$1</td>
+				<td align="right">$1</td>
+				</tr>
+				</tbody>
+				</table>
 			<p>Let's get started! 🙌🏼</p>
 			<h2 id="the-basics-">The Basics 👩&zwj;🏫</h2>
 			<p>As a programmer, it is pretty common to come across scenarios where you have to work with arrays of data, and to transform the said data into a desired format.</p>
